@@ -2,8 +2,10 @@
 
 #include "GameSaver.h"
 #include "Saver.h"
+#include "TestSaveGame.h"
 #include "GameFramework/SaveGame.h"
 #include "Kismet/GameplayStatics.h"
+#include "DebugUtils.h"
 
 #define DEFAULT_SAVE_FILE_PATH TEXT("DefaultSaveSlot")
 
@@ -30,7 +32,8 @@ FORCEINLINE void UGameSaver::CleanSavers()
 
 void UGameSaver::Save()
 {
-	USaveGame* SaveGameInstance = UGameplayStatics::CreateSaveGameObject(USaveGame::StaticClass());
+	LogDebug("Starting to save with %d Savers!!", Savers.Num());
+	UTestSaveGame* SaveGameInstance = Cast<UTestSaveGame>(UGameplayStatics::CreateSaveGameObject(UTestSaveGame::StaticClass()));
 	for (uint16 i = 0; i < Savers.Num(); i++)
 	{
 		ISaver* saver = Savers[i];
@@ -41,11 +44,14 @@ void UGameSaver::Save()
 	}
 
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveSlotName, UserIndex);
+
+	LogDebug("Finish saving!");
 }
 
 void UGameSaver::Load()
 {
-	USaveGame* LoadGameInstance = UGameplayStatics::LoadGameFromSlot(SaveSlotName, UserIndex);
+	LogDebug("LOADING with %d Savers!!", Savers.Num());
+	UTestSaveGame* LoadGameInstance = Cast<UTestSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveSlotName, UserIndex));
 	
 	for (uint16 i = 0; i < Savers.Num(); i++)
 	{
@@ -55,6 +61,8 @@ void UGameSaver::Load()
 			saver->Load(LoadGameInstance);
 		}
 	}
+
+	LogDebug("Finish LOADING!");
 }
 
 void UGameSaver::DeleteSave()

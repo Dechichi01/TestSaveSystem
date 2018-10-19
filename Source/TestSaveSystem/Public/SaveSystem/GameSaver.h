@@ -14,7 +14,9 @@ class ISaver;
  * Workflow:
 	. Register ISavers by using RegisterSaver
 	. ISaver::Save(USaveGame) will be called during save games
-	. ISaver::Load() will be called during load game
+	. ISaver::Load(USaveGame) will be called during load game
+
+   Issues: ISaver needs to cast USaveGame to the desired type
  */
 
 UCLASS(config = Game, transient, BlueprintType, Blueprintable)
@@ -40,6 +42,8 @@ public:
 	FORCEINLINE void CleanSavers();
 
 	void Save();
+
 	void Load();
+
 	void DeleteSave();
 };
