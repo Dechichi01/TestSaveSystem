@@ -36,7 +36,7 @@ void UGameSaver::Save()
 	UTestSaveGame* SaveGameInstance = Cast<UTestSaveGame>(UGameplayStatics::CreateSaveGameObject(UTestSaveGame::StaticClass()));
 	for (uint16 i = 0; i < Savers.Num(); i++)
 	{
-		ISaver* saver = Savers[i];
+		const ISaver* saver = Savers[i];
 		if (saver)
 		{
 			saver->Save(SaveGameInstance);
@@ -55,7 +55,7 @@ void UGameSaver::Load()
 	
 	for (uint16 i = 0; i < Savers.Num(); i++)
 	{
-		ISaver* saver = Savers[i];
+		const ISaver* saver = Savers[i];
 		if (saver)
 		{
 			saver->Load(LoadGameInstance);

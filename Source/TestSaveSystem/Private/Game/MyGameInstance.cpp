@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "MyGameInstance.h"
+#include "GameSaver.h"
 
-UMyGameInstance::UMyGameInstance(const FObjectInitializer& ObjectInitializer) {
-	Super(ObjectInitializer);
-	GameSaver = CreateDefaultSubobject<UGameSaver>(TEXT("Game Saver"));
+void UMyGameInstance::Init() {
+	Super::Init();
+	GameSaver = NewObject<UGameSaver>();
 }

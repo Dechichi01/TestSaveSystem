@@ -7,6 +7,8 @@
 #include "ActorStatics.generated.h"
 
 class UGameInstance;
+class ISaver;
+
 /**
  * 
  */
@@ -17,8 +19,12 @@ class TESTSAVESYSTEM_API UActorStatics : public UBlueprintFunctionLibrary
 	
 public:
 	UFUNCTION(BlueprintCallable, Category = "Save Game")
-	static void SaveGame(const UGameInstance* const GameInstance);
+	static void SaveGame(const UGameInstance* GameInstance);
 
 	UFUNCTION(BlueprintCallable, Category = "Save Game")
-	static void LoadGame(const UGameInstance* const GameInstance);
+	static void LoadGame(const UGameInstance* GameInstance);
+
+	static void RegisterForSave(const UGameInstance* GameInstance, ISaver* Saver);
+
+	static void UnregisterFromSave(const UGameInstance* GameInstance, ISaver* Saver);
 };

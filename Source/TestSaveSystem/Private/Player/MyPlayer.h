@@ -18,10 +18,10 @@ public:
 	AMyPlayer();
 
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Player")
+	UPROPERTY(EditAnywhere, Category = "Player")
 	FString PlayerName;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Player")
+	UPROPERTY(EditAnywhere, Category = "Player")
 	uint16 PlayerLevel;
 
 	// Called when the game starts or when spawned

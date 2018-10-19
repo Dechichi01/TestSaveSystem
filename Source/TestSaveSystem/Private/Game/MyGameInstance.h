@@ -16,10 +16,11 @@ class UMyGameInstance : public UGameInstance
 	GENERATED_BODY()
 	
 public:
-	UMyGameInstance(const FObjectInitializer& ObjectInitializer);
+	virtual void Init() override;
 
-	FORCEINLINE UGameSaver* const GetGameSaver() const { return GameSaver; };
+	FORCEINLINE UGameSaver* GetGameSaver() const { return GameSaver; };
 
 private:
+	UPROPERTY(VisibleAnywhere, Category = "Save Game")
 	UGameSaver* GameSaver;
 };
